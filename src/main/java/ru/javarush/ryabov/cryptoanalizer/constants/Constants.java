@@ -1,11 +1,13 @@
 package ru.javarush.ryabov.cryptoanalizer.constants;
 
 public class Constants {
-    private static final String RUSLOW = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
-    private static final String RUSHIGH = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
-    private static final String PUNCTUATION = "/?.,'\"}][{;:><_-+=|\\/)(*?&^%$№#@!~`";
-    private static final String ENGLOW = "abcdefghijklmnopqrstuvwxyz";
-    private static final String ENGHIGH = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final String RUS = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
+    private static final String PUNCTUATION = "/?.,'\"}][{;:><_-+=|\\/)(*?&^%$№#@!~` ";
+    private static final String ENG = "abcdefghijklmnopqrstuvwxyz";
     private static final String NUMBERS = "0123456789";
-    public static final String CONSTANTS = RUSLOW+RUSHIGH+PUNCTUATION+ ENGLOW + ENGHIGH + NUMBERS;
+    private static final String STRINGCONSTANTS = RUS + RUS.toUpperCase() + PUNCTUATION + ENG + ENG.toUpperCase() + NUMBERS;
+
+    public static final int KEY = 15;
+
+    public static final char[] CONSTANTS = STRINGCONSTANTS.toCharArray();
 }
