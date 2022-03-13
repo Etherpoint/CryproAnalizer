@@ -4,7 +4,6 @@ import ru.javarush.ryabov.cryptoanalizer.constants.Constants;
 
 public class Decoder {
     public static String lineDecoder(String line) {
-        //String line = "[ЗАщьЙtДАЗq";
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < line.length(); i++) {
             char character = line.charAt(i);
