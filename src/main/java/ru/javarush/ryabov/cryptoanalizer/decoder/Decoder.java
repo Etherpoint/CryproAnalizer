@@ -3,8 +3,8 @@ package ru.javarush.ryabov.cryptoanalizer.decoder;
 import ru.javarush.ryabov.cryptoanalizer.constants.Constants;
 
 public class Decoder {
-    public static void main(String[] args) {
-        String line = "Щътлоьjцтъg";
+    public static String lineDecoder(String line) {
+        //String line = "[ЗАщьЙtДАЗq";
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < line.length(); i++) {
             char character = line.charAt(i);
@@ -23,6 +23,6 @@ public class Decoder {
                 }
             }
         }
-        System.out.println(result);
+        return result.toString();
     }
 }

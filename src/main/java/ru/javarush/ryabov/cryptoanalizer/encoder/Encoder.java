@@ -3,9 +3,9 @@ package ru.javarush.ryabov.cryptoanalizer.encoder;
 import ru.javarush.ryabov.cryptoanalizer.constants.Constants;
 
 public class Encoder {
-    public static void main(String[] args) {
+    public static String lineEncoder(String text) {
         StringBuilder result = new StringBuilder();
-        String text = "Привет мир!";
+        //String text = "Привет мир!";
         for (int i = 0; i < text.length(); i++) {
             char character = text.charAt(i);
             for (int j = 0; j < Constants.CONSTANTS.length; j++) {
@@ -23,6 +23,6 @@ public class Encoder {
                 }
             }
         }
-        System.out.println(result);
+        return result.toString();
     }
 }
