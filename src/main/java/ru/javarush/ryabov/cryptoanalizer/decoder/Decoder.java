@@ -2,6 +2,8 @@ package ru.javarush.ryabov.cryptoanalizer.decoder;
 
 import ru.javarush.ryabov.cryptoanalizer.constants.Constants;
 
+import java.io.*;
+
 public class Decoder {
     public static String lineDecoder(String line) {
         StringBuilder result = new StringBuilder();
@@ -23,5 +25,14 @@ public class Decoder {
             }
         }
         return result.toString();
+    }
+    public static void fileDecoder(String file, String exitFile) throws IOException {
+        try (FileReader fileReader = new FileReader(file); BufferedReader bufferedReader = new BufferedReader(fileReader);
+             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(exitFile))){
+            while (bufferedReader.ready()){
+                int x = bufferedReader.read();
+                bufferedWriter.write(x-Constants.KEY);
+            }
+        }
     }
 }

@@ -12,9 +12,8 @@ public class Tester {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         String output = scanner.nextLine();
-        Encoder.fileEncoder(input, output);
-
-        /*System.out.println(Decoder.lineDecoder(Encoder.lineEncoder(message)));
-        KeyAnalizer.keyAnalizer("ьпыалыаоллдапы");*/
+        //Encoder.fileEncoder(input, output);
+        Decoder.fileDecoder(input, output);
+        //KeyAnalizer.keyAnalizer("ьпыалыаоллдапы");
     }
 }
