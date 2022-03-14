@@ -5,7 +5,7 @@ import ru.javarush.ryabov.cryptoanalizer.constants.Constants;
 import java.io.*;
 
 public class Encoder {
-    public static String lineEncoder(String text) {
+    /*public static String lineEncoder(String text) {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < text.length(); i++) {
             char character = text.charAt(i);
@@ -25,13 +25,23 @@ public class Encoder {
             }
         }
         return result.toString();
+    }*/
+    public static String lineEncoder(String text) {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < text.length(); i++) {
+            char character = text.charAt(i);
+            result.append((char) (character+ Constants.KEY));
+        }
+        return result.toString();
     }
+
+
     public static void fileEncoder(String file, String exitFile) throws IOException {
         try (FileReader fileReader = new FileReader(file); BufferedReader bufferedReader = new BufferedReader(fileReader);
-             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(exitFile))){
-            while (bufferedReader.ready()){
+             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(exitFile))) {
+            while (bufferedReader.ready()) {
                 int x = bufferedReader.read();
-                bufferedWriter.write(x+Constants.KEY);
+                bufferedWriter.write(x + Constants.KEY);
             }
         }
     }

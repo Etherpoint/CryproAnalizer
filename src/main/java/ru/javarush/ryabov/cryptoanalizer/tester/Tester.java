@@ -11,9 +11,11 @@ public class Tester {
     public static void main(String[] args) throws IOException {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
-        String output = scanner.nextLine();
+        System.out.println(Encoder.lineEncoder(input));
+        System.out.println(Decoder.lineDecoder(Encoder.lineEncoder(input)));
+        //String output = scanner.nextLine();
         //Encoder.fileEncoder(input, output);
-        Decoder.fileDecoder(input, output);
+        //Decoder.fileDecoder(input, output);
         //KeyAnalizer.keyAnalizer("ьпыалыаоллдапы");
     }
 }
