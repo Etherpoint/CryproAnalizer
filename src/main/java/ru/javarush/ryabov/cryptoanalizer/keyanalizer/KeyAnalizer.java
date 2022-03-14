@@ -5,7 +5,7 @@ import ru.javarush.ryabov.cryptoanalizer.constants.Constants;
 
 public class KeyAnalizer {
     public static void keyAnalizer(String text) {
-        int key = 0;
+        int key = 1;
         for (key = 1; key < 20; key++) {
             StringBuilder result = new StringBuilder();
 
@@ -32,7 +32,25 @@ public class KeyAnalizer {
                 }
             }
             //Проверяем ключ на адекватный результат
-            KeyChecker.keyChecker(result.toString(), key);
+            KeyChecker.keyChecker(result.toString());
         }
     }
+
+    //МЕТОД НА ДОРАБОТКЕ
+    /*public static void keyAnalizer (String text){
+        for (int i = 0; i < text.length(); i++) {
+            char character = text.charAt(i);
+            String word = String.valueOf(character);
+
+            //Условие содержания знаков
+            boolean condition = KeyChecker.contains(word, Constants.RUSCONST);
+            if (!condition) {
+                while (!condition) {
+                    String newText = text.replace(character, Constants.CHAR_RUCONST[i]);
+                    keyAnalizer(newText);
+                }
+            }
+            KeyChecker.keyChecker(text);
+        }
+    }*/
 }
