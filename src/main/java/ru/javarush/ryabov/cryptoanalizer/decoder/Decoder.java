@@ -11,10 +11,14 @@ public class Decoder {
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < text.length(); i++) {
             char character = text.charAt(i);
+            if (!Constants.RUCONST.contains(character)){
+                result.append(character);
+                continue;
+            }
             int oldIndex = Constants.RUCONST.indexOf(character);
             int newIndex = (oldIndex - Tester.KEY)%Constants.RUCONST.size();
             if (newIndex < 0){
-                newIndex +=Constants.RUCONST.size();
+                newIndex = Constants.RUCONST.size()+newIndex;
             }
             result.append(Constants.RUCONST.get(newIndex));
         }
