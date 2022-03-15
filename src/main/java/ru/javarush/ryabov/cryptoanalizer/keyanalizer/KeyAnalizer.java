@@ -4,7 +4,7 @@ import ru.javarush.ryabov.cryptoanalizer.constants.AnalizerConstants;
 import ru.javarush.ryabov.cryptoanalizer.constants.Constants;
 
 public class KeyAnalizer {
-    public static void keyAnalizer(String text) {
+    /*public static void keyAnalizer(String text) {
         int key = 1;
         for (key = 1; key < 20; key++) {
             StringBuilder result = new StringBuilder();
@@ -34,7 +34,7 @@ public class KeyAnalizer {
             //Проверяем ключ на адекватный результат
             KeyChecker.keyChecker(result.toString());
         }
-    }
+    }*/
 
     //МЕТОД НА ДОРАБОТКЕ
     /*public static void keyAnalizer (String text){
