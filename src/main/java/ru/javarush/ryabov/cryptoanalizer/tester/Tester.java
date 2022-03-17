@@ -14,7 +14,6 @@ public class Tester {
         String input = scanner.nextLine();
         String output = scanner.nextLine();
         String output2 = scanner.nextLine();
-
         KEY = scanner.nextInt();
         Encoder.fileEncoder(input, output);
         Decoder.fileDecoder(output, output2);
