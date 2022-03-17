@@ -1,4 +1,4 @@
-package ru.javarush.ryabov.cryptoanalizer.keyanalizer;
+package ru.javarush.ryabov.cryptoanalizer.bruteforce;
 
 import ru.javarush.ryabov.cryptoanalizer.constants.Constants;
 
@@ -19,7 +19,7 @@ public class BruteForce {
                 }
                 result.append(Constants.RU_CONST.get(newIndex));
             }
-            if (KeyChecker.keyChecker(result.toString()) == 0){
+            if (CheckConditions.checkConditions(result.toString()) == 0){
                 System.out.println("Возможная расшифровка: " + result + " , ключ шифрования: " + key);
             }
         }

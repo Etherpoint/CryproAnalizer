@@ -1,9 +1,9 @@
-package ru.javarush.ryabov.cryptoanalizer.keyanalizer;
+package ru.javarush.ryabov.cryptoanalizer.bruteforce;
 
 import ru.javarush.ryabov.cryptoanalizer.constants.Constants;
 
-public class KeyChecker {
-    public static int keyChecker(String result) {
+public class CheckConditions {
+    public static int checkConditions(String result) {
         //Условие наличия заглавных букв ЪЬЫ
         if (contains(result, "Ъ") || contains(result, "Ь") || contains(result, "Ы")){
             return 1;

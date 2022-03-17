@@ -1,7 +1,6 @@
 package ru.javarush.ryabov.cryptoanalizer.decoder;
 
 import ru.javarush.ryabov.cryptoanalizer.constants.Constants;
-import ru.javarush.ryabov.cryptoanalizer.keyanalizer.KeyChecker;
 import ru.javarush.ryabov.cryptoanalizer.tester.Tester;
 
 import java.io.*;

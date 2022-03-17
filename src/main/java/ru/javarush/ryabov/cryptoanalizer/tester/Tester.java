@@ -2,7 +2,6 @@ package ru.javarush.ryabov.cryptoanalizer.tester;
 
 import ru.javarush.ryabov.cryptoanalizer.decoder.Decoder;
 import ru.javarush.ryabov.cryptoanalizer.encoder.Encoder;
-import ru.javarush.ryabov.cryptoanalizer.keyanalizer.BruteForce;
 
 import java.io.IOException;
 import java.util.Scanner;
