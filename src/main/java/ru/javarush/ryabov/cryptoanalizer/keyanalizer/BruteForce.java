@@ -2,30 +2,26 @@ package ru.javarush.ryabov.cryptoanalizer.keyanalizer;
 
 import ru.javarush.ryabov.cryptoanalizer.constants.Constants;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-
 public class BruteForce {
     public static void bruteForce(String text) {
-        //Собираем уникальные символы в сет
-        String copyText = new String (text);
-        HashSet<Character> unique = new HashSet<>();
-        for (char character : text.toCharArray()) {
-            unique.add(character);
-        }
-        //Проходимся по сету и меняем символы в тексте
-        do {
-            for (char character : unique) {
-                ArrayList<Character> copy = new ArrayList<>((Constants.RUCONST));
-                int index = (int) (Math.random() * copy.size());
-                char randomizer = copy.get(index);
-                copyText.replace(character, randomizer);
-                copy.remove((Object) randomizer);
+        for (int key = -Constants.RU_CONST.size(); key < Constants.RU_CONST.size(); key++) {
+            StringBuilder result = new StringBuilder();
+            for (int i = 0; i < text.length(); i++) {
+                char character = text.charAt(i);
+                if (!Constants.RU_CONST.contains(character)){
+                    result.append(character);
+                    continue;
+                }
+                int oldIndex = Constants.RU_CONST.indexOf(character);
+                int newIndex = (oldIndex - key) % Constants.RU_CONST.size();
+                if (newIndex < 0){
+                    newIndex = Constants.RU_CONST.size()+newIndex;
+                }
+                result.append(Constants.RU_CONST.get(newIndex));
             }
-        }while (!(KeyChecker.keyChecker(copyText)));{
-            copyText = null;
+            if (KeyChecker.keyChecker(result.toString()) == 0){
+                System.out.println("Возможная расшифровка: " + result + " , ключ шифрования: " + key);
+            }
         }
     }
-
 }
