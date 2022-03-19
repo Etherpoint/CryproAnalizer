@@ -1,7 +1,7 @@
 package ru.javarush.ryabov.cryptoanalizer.commands;
 
 import ru.javarush.ryabov.cryptoanalizer.constants.Constants;
-import ru.javarush.ryabov.cryptoanalizer.tester.Tester;
+import ru.javarush.ryabov.cryptoanalizer.actions.Tester;
 
 import java.io.*;
 
