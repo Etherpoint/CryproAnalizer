@@ -11,11 +11,11 @@ public class CheckConditions {
             if (twoCharacters(result, i) == 1) {
                 return 1;
                 //3 согласных подряд
-            }/*else if (Constants.RU_LOW_ALPHABET.contains(String.valueOf(result.charAt(i))) &&
+            }else if (Constants.RU_LOW_ALPHABET.contains(String.valueOf(result.charAt(i))) &&
                     Constants.RU_LOW_ALPHABET.contains(String.valueOf(result.charAt(i+1)))&&
                     Constants.RU_LOW_ALPHABET.contains(String.valueOf(result.charAt(i+2)))){
                 return 1;
-            }*/
+            }
         }
         return 0;
     }
