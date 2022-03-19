@@ -1,17 +1,17 @@
 package ru.javarush.ryabov.cryptoanalizer.commands;
 
 import ru.javarush.ryabov.cryptoanalizer.bruteforce.CheckConditions;
+import ru.javarush.ryabov.cryptoanalizer.bruteforce.CheckWords;
 import ru.javarush.ryabov.cryptoanalizer.constants.Constants;
-import ru.javarush.ryabov.cryptoanalizer.tester.Tester;
 
 import java.io.*;
-import java.nio.ByteBuffer;
-import java.nio.CharBuffer;
-import java.nio.channels.FileChannel;
 
 public class BruteForce {
     public static void bruteForce(String text) {
-        for (int key = 0; key < Constants.RU_CONST.size(); key++) {
+        StringBuilder storage = new StringBuilder();
+        int key = 0;
+        for (int j = 0; j < Constants.RU_CONST.size(); j++) {
+            int coincidence = 0;
             StringBuilder result = new StringBuilder();
             for (int i = 0; i < text.length(); i++) {
                 char character = text.charAt(i);
@@ -20,42 +20,66 @@ public class BruteForce {
                     continue;
                 }
                 int oldCharIndex = Constants.RU_CONST.indexOf(character);
-                int newCharIndex = (oldCharIndex - key) % Constants.RU_CONST.size();
+                int newCharIndex = (oldCharIndex - j) % Constants.RU_CONST.size();
                 if (newCharIndex < 0) {
                     newCharIndex = Constants.RU_CONST.size() + newCharIndex;
                 }
                 result.append(Constants.RU_CONST.get(newCharIndex));
             }
             if (CheckConditions.checkConditions(result.toString()) == 0) {
-                System.out.println("Возможная расшифровка: " + result + " , ключ шифрования: " + key);
+                if (CheckWords.checkWords(result) > coincidence){
+                    storage = result;
+                    key = j;
+                }
+                //System.out.println("Возможная расшифровка: " + result + " , ключ шифрования: " + key);
             }else{
                 result.delete(0, result.length());
             }
         }
+        System.out.println("Возможная расшифровка: " + storage + ", ключ шифрования: " + key);
     }
 
-    public static void fileBruteForce(String input) throws IOException {
-        for (int key = 0; key < Constants.RU_CONST.size(); key++) {
-            StringBuilder stringBuilder = new StringBuilder();
+    public static void fileBruteForce(String input, String output) throws IOException {
+        StringBuilder storage = new StringBuilder();
+        int key = 0;
+        for (int j = 0; j < Constants.RU_CONST.size(); j++) {
+            int coincidence = 0;
+            StringBuilder result = new StringBuilder();
             try (BufferedReader bufferedReader = new BufferedReader(new FileReader(input))) {
                 while (bufferedReader.ready()) {
                     int x = bufferedReader.read();
                     char character = (char) x;
                     if (!Constants.RU_CONST.contains(character)) {
-                        stringBuilder.append(character);
+                        result.append(character);
                         continue;
                     }
                     int oldIndex = Constants.RU_CONST.indexOf(character);
-                    int newIndex = (oldIndex - key) % Constants.RU_CONST.size();
+                    int newIndex = (oldIndex - j) % Constants.RU_CONST.size();
                     if (newIndex < 0) {
                         newIndex = Constants.RU_CONST.size() + newIndex;
                     }
-                    stringBuilder.append(Constants.RU_CONST.get(newIndex));
+                    result.append(Constants.RU_CONST.get(newIndex));
                 }
-                if (CheckConditions.checkConditions(stringBuilder.toString()) == 0) {
-                    System.out.println("Возможная расшифровка: " + stringBuilder + " , ключ: " + key);
+                if (CheckConditions.checkConditions(result.toString()) == 0) {
+                    if (CheckWords.checkWords(result) > coincidence) {
+                        storage = result;
+                        key = j;
+                        storage.append("\n Ключ от шифра: ").append(key);
+                    }
+                }else{
+                    result.delete(0, result.length());
+                }
+            }try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(output))){
+                for (int i = 0; i < storage.length(); i++) {
+                    char character = storage.charAt(i);
+                    if (!Constants.RU_CONST.contains(character)) {
+                        bufferedWriter.write(character);
+                        continue;
+                    }
+                    bufferedWriter.write(character);
                 }
             }
         }
+
     }
 }
