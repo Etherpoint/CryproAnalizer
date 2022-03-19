@@ -1,5 +1,6 @@
-package ru.javarush.ryabov.cryptoanalizer.bruteforce;
+package ru.javarush.ryabov.cryptoanalizer.commands;
 
+import ru.javarush.ryabov.cryptoanalizer.bruteforce.CheckConditions;
 import ru.javarush.ryabov.cryptoanalizer.constants.Constants;
 import ru.javarush.ryabov.cryptoanalizer.tester.Tester;
 
