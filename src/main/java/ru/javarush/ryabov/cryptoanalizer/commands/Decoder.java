@@ -7,7 +7,7 @@ import java.io.*;
 
 public class Decoder {
     //Метод для консольного текста
-    public static String textdecoder (String text){
+    public static String textDecoder (String text){
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < text.length(); i++) {
             char character = text.charAt(i);
