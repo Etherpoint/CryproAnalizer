@@ -4,65 +4,57 @@ import ru.javarush.ryabov.cryptoanalizer.constants.Constants;
 
 public class CheckConditions {
     public static int checkConditions(String result) {
-        //Условие наличия заглавных букв ЪЬЫ
-        if (contains(result, "Ъ") || contains(result, "Ь") || contains(result, "Ы")){
-            return 1;
-        //Условие проверки первого символа
-        }else if (contains("»,>;:)." + Constants.RU_LOW_ALPHABET, String.valueOf(result.charAt(0)))){
+        if (otherConditions(result) == 1) {
             return 1;
         }
         for (int i = 0; i < result.length(); i++) {
-            /*
-            Условия проверки двух символов
-            */
-            if (i < result.length() - 1) {
-
-                //Условие на наличие двух символов пунктуации подряд
-                if (contains(Constants.PUNCTUATION, String.valueOf(result.charAt(i))) &&
-                        contains(Constants.PUNCTUATION, String.valueOf(result.charAt(i + 1)))){
-                    return 1;
-
-                //Условие на наличие двух заглавных подряд
-                } else if (contains(Constants.RU_ALPHABET, String.valueOf(result.charAt(i))) &&
-                        contains(Constants.RU_ALPHABET, String.valueOf(result.charAt(i + 1)))) {
-                    return 1;
-
-                //Условие на пробел после знака препинания
-                } else if (contains(".,?!:;" , String.valueOf(result.charAt(i))) &&
-                        result.charAt(i+1) != ' ') {
-                    return 1;
-
-                //Условие на Заглавную букву сразу после прописной
-                }else if (contains(Constants.RU_LOW_ALPHABET, String.valueOf(result.charAt(i))) &&
-                        contains(Constants.RU_ALPHABET, String.valueOf(result.charAt(i+1)))){
-                    return 1;
-                }
-            }
-            /*
-            Условия проверки трех символов
-            */
-            if (i < result.length() - 2) {
-
-                //условие 3 согласных подряд
-                if (contains(Constants.CONSONANTS, String.valueOf(result.charAt(i)))) {
-                    if (contains(Constants.CONSONANTS, String.valueOf(result.charAt(i + 1)))) {
-                        if (contains(Constants.CONSONANTS, String.valueOf(result.charAt(i + 2)))) {
-                            return 1;
-                        }
-                    }
-
-                //Условие проверки трех одинаковых символов
-                }else if (result.charAt(i) == result.charAt(i+1) &&
-                        result.charAt(i)==result.charAt(i+2) &&
-                        contains(Constants.RU_LOW_ALPHABET, String.valueOf(result.charAt(i)))){
-                    return 1;
-                }
-            }
+            if (twoCharacters(result, i) == 1) {
+                return 1;
+                //3 согласных подряд
+            }/*else if (Constants.RU_LOW_ALPHABET.contains(String.valueOf(result.charAt(i))) &&
+                    Constants.RU_LOW_ALPHABET.contains(String.valueOf(result.charAt(i+1)))&&
+                    Constants.RU_LOW_ALPHABET.contains(String.valueOf(result.charAt(i+2)))){
+                return 1;
+            }*/
         }
         return 0;
     }
 
-    public static boolean contains(String str, String substr) {
-        return str.contains(substr);
+    public static int otherConditions(String result) {
+        //Условие наличия заглавных букв ЪЬЫ
+        if (result.contains("Ъ") || result.contains("Ь") || result.contains("Ы")) {
+            return 1;
+        }//Условие проверки первого символа
+        else if (("»,>;:)." + Constants.RU_LOW_ALPHABET).contains(String.valueOf(result.charAt(0)))) {
+            return 1;
+        }
+        return 0;
+    }
+
+    public static int twoCharacters(String result, int i) {
+        /*
+        Условия проверки двух символов
+        */
+        if (i < result.length() - 1) {
+            //Условие на наличие двух одинаковых символов пунктуации подряд
+            if (Constants.PUNCTUATION.contains(String.valueOf(result.charAt(i))) &&
+                    Constants.PUNCTUATION.contains(String.valueOf(result.charAt(i + 1))) &&
+                    result.charAt(i) == result.charAt(i + 1)) {
+                return 1;
+            }//Условие двух ёё йй ъъ ьь чч ыы цц гг шш щщ
+            else if ("ёйъьчыцгшщЁЙЪЬЧЫЦГШЩ".contains(String.valueOf(result.charAt(i))) &
+            result.charAt(i) == result.charAt(i+1)){
+                return 1;
+            }//Условие на ь или ъ или ы после гласной
+            else if (Constants.VOWELS.contains(String.valueOf(result.charAt(i))) &
+            "ьъыЬЪЫ".contains(String.valueOf(result.charAt(i+1)))){
+                return 1;
+            }//Заглавная после прописи
+            else if (Constants.RU_LOW_ALPHABET.contains(String.valueOf(result.charAt(i))) &
+            Constants.RU_LOW_ALPHABET.toUpperCase().contains(String.valueOf(result.charAt(i+1)))){
+                return 1;
+            }
+        }
+        return 0;
     }
 }
