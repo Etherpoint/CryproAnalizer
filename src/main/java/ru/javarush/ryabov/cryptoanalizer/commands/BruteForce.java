@@ -28,14 +28,16 @@ public class BruteForce {
             }
             if (CheckConditions.checkConditions(result.toString()) == 0) {
                 System.out.println("Возможная расшифровка: " + result + " , ключ шифрования: " + key);
+            }else{
+                result.delete(0, result.length());
             }
         }
     }
 
     public static void fileBruteForce(String input) throws IOException {
         for (int key = 0; key < Constants.RU_CONST.size(); key++) {
+            StringBuilder stringBuilder = new StringBuilder();
             try (BufferedReader bufferedReader = new BufferedReader(new FileReader(input))) {
-                StringBuilder stringBuilder = new StringBuilder();
                 while (bufferedReader.ready()) {
                     int x = bufferedReader.read();
                     char character = (char) x;
