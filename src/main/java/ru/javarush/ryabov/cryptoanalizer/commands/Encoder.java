@@ -7,10 +7,14 @@ import java.io.*;
 
 public class Encoder {
     //Метод для консольного текста
-    public static String textencoder (String text){
+    public static String textEncoder (String text){
         StringBuilder result = new StringBuilder();
         for (int i = 0; i < text.length(); i++) {
             char character = text.charAt(i);
+            if (!Constants.RU_CONST.contains(character)){
+                result.append(character);
+                continue;
+            }
             int oldIndex = Constants.RU_CONST.indexOf(character);
             int newIndex = (oldIndex + Tester.KEY)%Constants.RU_CONST.size();
             result.append(Constants.RU_CONST.get(newIndex));
