@@ -2,12 +2,15 @@ package ru.javarush.ryabov.cryptoanalizer.commands;
 
 import ru.javarush.ryabov.cryptoanalizer.bruteforce.CheckConditions;
 import ru.javarush.ryabov.cryptoanalizer.bruteforce.CheckWords;
+import ru.javarush.ryabov.cryptoanalizer.entity.Result;
 import ru.javarush.ryabov.cryptoanalizer.constants.Constants;
+import ru.javarush.ryabov.cryptoanalizer.entity.ResultCode;
+import ru.javarush.ryabov.cryptoanalizer.exceptions.AppException;
 
 import java.io.*;
 
-public class BruteForce {
-    public static void bruteForce(String text) {
+public class BruteForce implements Action {
+    /*public static void bruteForce(String text) {
         StringBuilder storage = new StringBuilder();
         int key = 0;
         for (int j = 0; j < Constants.RU_CONST.size(); j++) {
@@ -37,9 +40,9 @@ public class BruteForce {
             }
         }
         System.out.println("Возможная расшифровка: " + storage + ", ключ шифрования: " + key);
-    }
+    }*/
 
-    public static void fileBruteForce(String input, String output) throws IOException {
+    public static Result fileBruteForce(String input, String output) throws IOException {
         StringBuilder storage = new StringBuilder();
         int key = 0;
         for (int j = 0; j < Constants.RU_CONST.size(); j++) {
@@ -60,16 +63,18 @@ public class BruteForce {
                     }
                     result.append(Constants.RU_CONST.get(newIndex));
                 }
+                //Проверка получившегося текста
                 if (CheckConditions.checkConditions(result.toString()) == 0) {
                     if (CheckWords.checkWords(result) > coincidence) {
                         storage = result;
                         key = j;
                         storage.append("\n Ключ от шифра: ").append(key);
                     }
-                }else{
+                } else {
                     result.delete(0, result.length());
                 }
-            }try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(output))){
+            }
+            try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(output))) {
                 for (int i = 0; i < storage.length(); i++) {
                     char character = storage.charAt(i);
                     if (!Constants.RU_CONST.contains(character)) {
@@ -80,6 +85,17 @@ public class BruteForce {
                 }
             }
         }
+        return new Result("Метод успешно завершен", ResultCode.OK);
+    }
 
+    @Override
+    public Result execute(String[] parameters) {
+        try {
+            String input = Constants.TXT_FOLDER + parameters[0];
+            String output = Constants.TXT_FOLDER + parameters[1];
+            return fileBruteForce(input, output);
+        } catch (IOException e) {
+            throw new AppException("Невалидные данные");
+        }
     }
 }
