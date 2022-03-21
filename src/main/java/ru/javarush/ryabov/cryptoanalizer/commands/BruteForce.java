@@ -45,9 +45,11 @@ public class BruteForce implements Action {
     public static Result fileBruteForce(String input, String output) throws IOException {
         StringBuilder storage = new StringBuilder();
         int key = 0;
+        //Перебираем все ключи
         for (int j = 0; j < Constants.RU_CONST.size(); j++) {
             int coincidence = 0;
             StringBuilder result = new StringBuilder();
+            //Здесь получаем на вход файл и начинаем декодировать
             try (BufferedReader bufferedReader = new BufferedReader(new FileReader(input))) {
                 while (bufferedReader.ready()) {
                     int x = bufferedReader.read();
@@ -74,6 +76,7 @@ public class BruteForce implements Action {
                     result.delete(0, result.length());
                 }
             }
+            //Запись расшифрованного текста в новый файл
             try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(output))) {
                 for (int i = 0; i < storage.length(); i++) {
                     char character = storage.charAt(i);
