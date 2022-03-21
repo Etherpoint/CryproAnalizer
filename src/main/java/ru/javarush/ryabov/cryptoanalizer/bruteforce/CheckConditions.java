@@ -4,11 +4,12 @@ import ru.javarush.ryabov.cryptoanalizer.constants.Constants;
 
 public class CheckConditions {
     public static int checkConditions(String result) {
+        if (result.contains("Ь") | result.contains("Ъ")){
+            return 1;
+        }
         //Проверяем циклом все символы на правила русского языка
         for (int i = 0; i < result.length(); i++) {
-            if (result.charAt(i) == 'Ь' | result.charAt(i) == 'Ъ'){
-                return 1;
-            } else if (twoCharacters(result, i) == 1 |
+            if (twoCharacters(result, i) == 1 |
                     threeCharacters(result, i) == 1 |
                     fourCharacters(result, i) == 1) {
                 return 1;
