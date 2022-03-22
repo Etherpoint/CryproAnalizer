@@ -7,6 +7,8 @@ import ru.javarush.ryabov.cryptoanalizer.entity.ResultCode;
 import ru.javarush.ryabov.cryptoanalizer.exceptions.AppException;
 
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class BruteForce implements Action {
     /*public static void bruteForce(String text) {
@@ -92,6 +94,12 @@ public class BruteForce implements Action {
     public Result execute(String[] parameters) {
         try {
             String input = parameters[0];
+            if (input.equals("bruteforce.txt") | input.equals("decrypt.txt") | input.equals("encrypt.txt") | input.equals("text.txt")) {
+                input = Constants.TXT_FOLDER + input;
+            }else if (Files.notExists(Path.of(input))) {
+                input = Constants.TXT_FOLDER + "encrypt.txt";
+                System.out.println("Такого файла не существует, будет читаться файл "+ input);
+            }
             String output = parameters[1];
             fileBruteForce(input, output);
             return new Result("BruteForce complete", ResultCode.OK);
