@@ -68,11 +68,9 @@ public class BruteForce implements Action {
                 }
                 //Проверка получившегося текста на правила русского языка
                 if (CheckConditions.checkConditions(result.toString()) == 0) {
-                    if (CheckWords.checkWords(result) > coincidence) {
-                        storage = result;
-                        key = j;
-                        storage.append("\n Ключ от шифра: ").append(key);
-                    }
+                    storage = result;
+                    key = j;
+                    storage.append("\n Ключ от шифра: ").append(key);
                 } else {
                     result.delete(0, result.length());
                 }
