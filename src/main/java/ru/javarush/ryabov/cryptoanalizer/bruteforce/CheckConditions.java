@@ -19,8 +19,8 @@ public class CheckConditions {
     public static int twoCharacters(String result, int i) {
         //Условия проверки двух символов
         if (i < result.length() - 1) {
-            //Два символа ъ ь й ё ч ы
-            if ("ъьйёчыЪЬЙЁЧЫ".contains(String.valueOf(result.charAt(i))) &&
+            //Два символа ъ ь й ё ч ы щ
+            if ("ъьйёчыщЪЬЙЁЧЫЩ".contains(String.valueOf(result.charAt(i))) &&
                     String.valueOf(result.charAt(i)).equalsIgnoreCase(String.valueOf(result.charAt(i + 1)))) {
                 return 1;
             }

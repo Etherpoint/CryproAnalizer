@@ -29,7 +29,7 @@ public class ConsoleRunner {
     public static final String INCORRECT_SELECTION = "Incorrect selection";
 
     //Переменная с блоком вопросов
-    private static final String[][][] QUESTIONS =new String[][][]{
+    private static final String[][][] QUESTIONS = new String[][][]{
             {
                     {"encode"},
                     {"Enter source (full path) OR Enter for text.txt", Constants.TXT_FOLDER + "text.txt"},
@@ -38,7 +38,7 @@ public class ConsoleRunner {
             },
             {
                     {"decode"},
-                    {"Enter source (full path) OR Enter for encrypt.txt",  Constants.TXT_FOLDER + "encrypt.txt"},
+                    {"Enter source (full path) OR Enter for encrypt.txt", Constants.TXT_FOLDER + "encrypt.txt"},
                     {"Enter destination (full path) OR Enter for decrypt.txt", Constants.TXT_FOLDER + "decrypt.txt"},
                     {"Enter key (int number OR Enter for key=1) :", "1"}
             },
@@ -73,7 +73,7 @@ public class ConsoleRunner {
         do {
             System.out.println(SELECT_FUNCTION);
             String input = scanner.nextLine();
-            mode = switch (input){
+            mode = switch (input) {
                 case "1" -> 1;
                 case "2" -> 2;
                 case "3" -> 3;
@@ -82,7 +82,7 @@ public class ConsoleRunner {
                     yield -1;
                 }
             };
-        }while (mode < 0);
+        } while (mode < 0);
         return mode;
     }
 }

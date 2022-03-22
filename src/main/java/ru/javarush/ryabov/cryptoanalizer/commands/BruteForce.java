@@ -1,6 +1,7 @@
 package ru.javarush.ryabov.cryptoanalizer.commands;
 
 import ru.javarush.ryabov.cryptoanalizer.bruteforce.CheckConditions;
+import ru.javarush.ryabov.cryptoanalizer.bruteforce.CheckWords;
 import ru.javarush.ryabov.cryptoanalizer.entity.Result;
 import ru.javarush.ryabov.cryptoanalizer.constants.Constants;
 import ru.javarush.ryabov.cryptoanalizer.entity.ResultCode;
@@ -69,9 +70,12 @@ public class BruteForce implements Action {
                 }
                 //Проверка получившегося текста на правила русского языка
                 if (CheckConditions.checkConditions(result.toString()) == 0) {
-                    storage = result;
-                    key = j;
-                    storage.append("\n Ключ от шифра: ").append(key);
+                    if (CheckWords.checkWords(result) > coincidence){
+                        coincidence = CheckWords.checkWords(result);
+                        storage = result;
+                        key = j;
+                        storage.append("\n Ключ от шифра: ").append(key);
+                    }
                 } else {
                     result.delete(0, result.length());
                 }
