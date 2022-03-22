@@ -95,15 +95,7 @@ public class BruteForce implements Action {
     public Result execute(String[] parameters) {
         try {
             String input = parameters[0];
-            if (input.equals("")) {
-                input = Constants.TXT_FOLDER + "text.txt";
-                System.out.println("Была указана пустая строка, поэтому файл читается из " + input);
-            }
             String output = parameters[1];
-            if (output.equals("")){
-                output = Constants.TXT_FOLDER + "bruteforce.txt";
-                System.out.println("Была указана пустая строка, поэтому файл записывается в " + output);
-            }
             fileBruteForce(input, output);
             return new Result("BruteForce complete", ResultCode.OK);
         } catch (IOException e) {
