@@ -42,9 +42,10 @@ public class BruteForce implements Action {
         System.out.println("Возможная расшифровка: " + storage + ", ключ шифрования: " + key);
     }*/
 
-    public static Result fileBruteForce(String input, String output) throws IOException {
+    //Метод для обработки текстового файла
+    public static void fileBruteForce(String input, String output) throws IOException {
         StringBuilder storage = new StringBuilder();
-        int key = 0;
+        int key;
         //Перебираем все ключи
         for (int j = 0; j < Constants.RU_CONST.size(); j++) {
             int coincidence = 0;
@@ -65,7 +66,7 @@ public class BruteForce implements Action {
                     }
                     result.append(Constants.RU_CONST.get(newIndex));
                 }
-                //Проверка получившегося текста
+                //Проверка получившегося текста на правила русского языка
                 if (CheckConditions.checkConditions(result.toString()) == 0) {
                     if (CheckWords.checkWords(result) > coincidence) {
                         storage = result;
@@ -88,17 +89,25 @@ public class BruteForce implements Action {
                 }
             }
         }
-        return new Result("Метод успешно завершен", ResultCode.OK);
     }
 
     @Override
     public Result execute(String[] parameters) {
         try {
-            String input = Constants.TXT_FOLDER + parameters[0];
-            String output = Constants.TXT_FOLDER + parameters[1];
-            return fileBruteForce(input, output);
+            String input = parameters[0];
+            if (input.equals("")) {
+                input = Constants.TXT_FOLDER + "text.txt";
+                System.out.println("Была указана пустая строка, поэтому файл читается из " + input);
+            }
+            String output = parameters[1];
+            if (output.equals("")){
+                output = Constants.TXT_FOLDER + "bruteforce.txt";
+                System.out.println("Была указана пустая строка, поэтому файл записывается в " + output);
+            }
+            fileBruteForce(input, output);
+            return new Result("BruteForce complete", ResultCode.OK);
         } catch (IOException e) {
-            throw new AppException("Невалидные данные");
+            throw new AppException("invalid parameters");
         }
     }
 }

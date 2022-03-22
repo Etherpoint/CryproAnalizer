@@ -2,7 +2,6 @@ package ru.javarush.ryabov.cryptoanalizer.commands;
 
 import ru.javarush.ryabov.cryptoanalizer.entity.Result;
 import ru.javarush.ryabov.cryptoanalizer.constants.Constants;
-import ru.javarush.ryabov.cryptoanalizer.console.ConsoleRunner;
 import ru.javarush.ryabov.cryptoanalizer.entity.ResultCode;
 import ru.javarush.ryabov.cryptoanalizer.exceptions.AppException;
 
@@ -28,7 +27,7 @@ public class Decoder implements Action {
         return result.toString();
     }*/
     //Метод для текстового файла
-    public static Result fileDecoder(String file, String exitFile, int key) throws IOException {
+    public static void fileDecoder(String file, String exitFile, int key) throws IOException {
         try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
              BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(exitFile))) {
             while (bufferedReader.ready()) {
@@ -46,18 +45,18 @@ public class Decoder implements Action {
                 bufferedWriter.write(Constants.RU_CONST.get(newIndex));
             }
         }
-        return new Result("Метод успешно завершен", ResultCode.OK);
     }
 
     @Override
     public Result execute(String[] parameters) {
         try {
-            String input = Constants.TXT_FOLDER + parameters[0];
-            String output = Constants.TXT_FOLDER + parameters[1];
+            String input = parameters[0];
+            String output = parameters[1];
             int key = Integer.parseInt(parameters[2]);
-            return fileDecoder(input, output, key);
+            fileDecoder(input, output, key);
+            return new Result("Decode complete", ResultCode.OK);
         } catch (IOException e) {
-            throw new AppException("Невалидные данные");
+            throw new AppException("invalid parameters");
         }
     }
 }
