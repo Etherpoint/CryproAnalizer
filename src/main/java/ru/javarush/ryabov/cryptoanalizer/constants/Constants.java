@@ -10,7 +10,7 @@ public class Constants {
             'Р', 'С', 'Т', 'У', 'Ф', 'Х', 'Ц', 'Ч', 'Ш', 'Щ', 'Ъ', 'Ы', 'Ь', 'Э', 'Ю', 'Я', '?', '.', ',','!', '"',
             '\'', '^'));
 
-    public static final String[] WORDS = new String[] {"год", "человек", "время", "дело", "жизнь", "рука", "день",
+    public static final String[] WORDS = new String[] {"мы","ты","вы","он","это","тот","ваш","год", "человек", "время", "дело", "жизнь", "рука", "день",
             "раз", "работа", "слово", "место", "лицо", "друг", "глаз", "вопрос", "дом", "сторона", "страна", "мир", "случай"};
 
     public static final String TXT_FOLDER = System.getProperty("user.dir") + File.separator + "texts" + File.separator;
